@@ -200,7 +200,23 @@ ORDER BY
 WITH Player_age AS (
     SELECT 
         (YEAR(date) - YEAR(birthday)) AS Age, 
-        pa.overall_rating AS Rating
+        pa.overall_rating AS Overall_Rating,
+        pa.potential AS Potential,
+        pa.dribbling AS Dribbling,
+        pa.curve AS Curve,
+        pa.free_kick_accuracy AS Free_Kick_Accuracy,
+        pa.long_passing AS Long_Pass,
+        pa.ball_control AS Ball_Control,
+        pa.acceleration AS Acceleration,
+        pa.sprint_speed AS Sprint_Speed,
+        pa.agility AS Agility,
+        pa.reactions AS Reactions,
+        pa.balance AS Balance,
+        pa.shot_power AS Shot_Power,
+        pa.jumping AS Jumping,
+        pa.stamina AS Stamina,
+        pa.strength AS Strength,
+        pa.long_shots AS Long_Shot
     FROM 
         player AS p
     JOIN 
@@ -208,21 +224,38 @@ WITH Player_age AS (
 )
 SELECT 
     CASE 
-        WHEN Age < 20 THEN '19 Under' 
-        WHEN Age > 20 AND Age <= 25 THEN '20 to 25'
+        WHEN Age < 20 THEN 'Under 20' 
+        WHEN Age >= 20 AND Age <= 25 THEN '20 to 25'
         WHEN Age > 25 AND Age <= 30 THEN '26 to 30'
         WHEN Age > 30 AND Age <= 35 THEN '31 to 35'
         WHEN Age > 35 AND Age <= 40 THEN '36 to 40'
         WHEN Age > 40 AND Age <= 45 THEN '41 to 45'
-        ELSE '45 Over' 
+        ELSE '45 and Over' 
     END AS `Age Group`, 
-    AVG(Rating) AS Average_Rating
+    AVG(Overall_Rating) AS Average_Rating,
+    AVG(Potential) AS Average_Potential,
+    AVG(Dribbling) AS Average_Dribbling,
+    AVG(Curve) AS Average_Curve,
+    AVG(Free_Kick_Accuracy) AS Average_Free_Kick_Accuracy,
+    AVG(Long_Pass) AS Average_Long_Pass,
+    AVG(Ball_Control) AS Average_Ball_Control,
+    AVG(Acceleration) AS Average_Acceleration,
+    AVG(Sprint_Speed) AS Average_Sprint_Speed,
+    AVG(Agility) AS Average_Agility,
+    AVG(Reactions) AS Average_Reactions,
+    AVG(Balance) AS Average_Balance,
+    AVG(Shot_Power) AS Average_Shot_Power,
+    AVG(Jumping) AS Average_Jumping,
+    AVG(Stamina) AS Average_Stamina,
+    AVG(Strength) AS Average_Strength,
+    AVG(Long_Shot) AS Average_Long_Shot
 FROM 
     Player_age 
 GROUP BY 
     1
 ORDER BY 
-	1;
+    1;
+
 ```
 
 
